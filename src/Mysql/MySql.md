@@ -382,3 +382,29 @@ having(分组后带有条件只能使用having)
 
 order by (它必须放到最后)
 
+
+
+## 四、对数据库进行查询
+
+### 1.多表查询
+
+1.1交叉连接查询(基本不会使用-得到的是两个表的乘积)
+
+语法：select * from A,B；
+
+1.2内连接查询(使用的关键字  inner join   --inner可以省略)
+
+隐式内连接：select * from A,B where 条件；
+
+显示内连接：select * from A inner join B on 条件；
+
+1.3.外连接查询(使用的关键字  outer join   --outer可以省略)
+
+左外连接：select * from A left outer join B on 条件；
+
+右外连接：
+
+
+
+
+
