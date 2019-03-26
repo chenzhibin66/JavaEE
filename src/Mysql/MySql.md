@@ -8,10 +8,6 @@ create  database 库名;
 
 create  database 库名  character set 编码;
 
-![1551865231173](C:\Users\ADMINI~1\AppData\Local\Temp\1551865231173.png)
-
-![1551865500450](C:\Users\ADMINI~1\AppData\Local\Temp\1551865500450.png)
-
 ### 2.删除数据库
 
 drop database 数据库名;
@@ -20,11 +16,11 @@ drop database 数据库名;
 
 use 库名；
 
-![1551866974509](C:\Users\ADMINI~1\AppData\Local\Temp\1551866974509.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1g7tbs9xyj308p01dgle.jpg)
 
 ### 4.查看当前正在使用的库
 
-![1551867040568](C:\Users\ADMINI~1\AppData\Local\Temp\1551867040568.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1g7v0utt6j30aq03wglh.jpg)
 
 ## 二、对数据库表的操作
 
@@ -40,7 +36,7 @@ create table 表名（
 
 ）；
 
-![1551867152962](C:\Users\ADMINI~1\AppData\Local\Temp\1551867152962.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1g7w91xu6j30e005gmxb.jpg)
 
 ### 2.查看数据库表
 
@@ -48,19 +44,19 @@ create table 表名（
 
 show tables;
 
-![1551867187785](C:\Users\ADMINI~1\AppData\Local\Temp\1551867187785.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1g7wzzlg6j309v06iaa1.jpg)
 
 查看表的结构
 
 Desc 表名;
 
-![1551867224347](C:\Users\ADMINI~1\AppData\Local\Temp\1551867224347.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1g7xjeuzsj30jb05pdg0.jpg)
 
 ### 3.删除一张表
 
 drop table 表名；
 
-![1551867279363](C:\Users\ADMINI~1\AppData\Local\Temp\1551867279363.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1g7ykbvv7j30ba01pq2r.jpg)
 
 ### 4.修改表
 
@@ -68,13 +64,13 @@ drop table 表名；
 
 alter table 表名 add 字段名  类型(长度)  [约束]
 
-![1551867673362](C:\Users\ADMINI~1\AppData\Local\Temp\1551867673362.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1gbjljkqpj30ji06pdg3.jpg)
 
 #### 4.2修改列的类型(长度、约束)
 
 alter table 表名 modify  要修改的字段名  类型(长度)    [约束]
 
-![1551867826634](C:\Users\ADMINI~1\AppData\Local\Temp\1551867826634.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1gblkhmgoj30k808oaaj.jpg)
 
 
 
@@ -82,7 +78,7 @@ alter table 表名 modify  要修改的字段名  类型(长度)    [约束]
 
 alter  table 表名 change 旧列名  新列名  类型(长度)    [约束]
 
-![1551920735674](C:\Users\ADMINI~1\AppData\Local\Temp\1551920735674.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1gbn63f03j30lq089gm3.jpg)
 
 
 
@@ -90,7 +86,7 @@ alter  table 表名 change 旧列名  新列名  类型(长度)    [约束]
 
 alter table 表名 drop 列名
 
-![1551920805665](C:\Users\ADMINI~1\AppData\Local\Temp\1551920805665.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1gbogzfvoj30ki07z3yw.jpg)
 
 
 
@@ -98,7 +94,7 @@ alter table 表名 drop 列名
 
 rename table 表名 to 新表名
 
-![1551920877649](C:\Users\ADMINI~1\AppData\Local\Temp\1551920877649.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1gbpg7q8kj30d507lq30.jpg)
 
 
 
@@ -106,9 +102,7 @@ rename table 表名 to 新表名
 
 alter table 表名 character set 编码
 
-
-
-![1551921096950](C:\Users\ADMINI~1\AppData\Local\Temp\1551921096950.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1gbqggmp0j30g202bjra.jpg)
 
 
 
@@ -116,7 +110,7 @@ alter table 表名 character set 编码
 
 show create  table tb_user；
 
-![1551921008785](C:\Users\ADMINI~1\AppData\Local\Temp\1551921008785.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1gbrtlaxij30i50dijsa.jpg)
 
 
 
@@ -126,13 +120,11 @@ show create  table tb_user；
 
 insert into 表名(列名1，列名2.列名3...) values(值1，值2，值3....)；
 
-![1551921349589](C:\Users\ADMINI~1\AppData\Local\Temp\1551921349589.png)
-
 
 
 insert into 表名 values(值1，值2，值3....);
 
-![1551921424982](C:\Users\ADMINI~1\AppData\Local\Temp\1551921424982.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1g84snvjaj30k805gglq.jpg)
 
 
 
@@ -140,13 +132,11 @@ insert into 表名 values(值1，值2，值3....);
 
 方式一【不建议】
 
-直接修改数据库的安装目录中的my.ini文件![1551921652526](C:\Users\ADMINI~1\AppData\Local\Temp\1551921652526.png)
+直接修改数据库的安装目录中的my.ini文件
 
 方式二
 
 set names gbk；
-
-![1551921853181](C:\Users\ADMINI~1\AppData\Local\Temp\1551921853181.png)
 
 
 
@@ -156,15 +146,13 @@ set names gbk；
 
 update 表名 set 字段名=值,字段名=值,字段名=值,
 
-![1551922023120](C:\Users\ADMINI~1\AppData\Local\Temp\1551922023120.png)
-
 它会将列的所有记录都更改
 
 ##### 2.2带条件的
 
 update 表名 set 字段名=值 where 条件；
 
-![1551922299470](C:\Users\ADMINI~1\AppData\Local\Temp\1551922299470.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1gbuoq4v9j30h50953z2.jpg)
 
 
 
@@ -174,25 +162,17 @@ update 表名 set 字段名=值 where 条件；
 
 delete from 表名 where 
 
-![1551922433151](C:\Users\ADMINI~1\AppData\Local\Temp\1551922433151.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1gbz4nj3sj30ff0esq3p.jpg)
 
 **注意，删除后uid不会重置**
 
 
 
-##### 3.2带条件的
-
-先准备数据
-
-insert into tb_user valuses(null,'老王','666');
-
-![1551922547072](C:\Users\ADMINI~1\AppData\Local\Temp\1551922547072.png)
-
-
+##### 3.2不带条件的
 
 delete from tb_user;
 
-![1551922610963](C:\Users\ADMINI~1\AppData\Local\Temp\1551922610963.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1gc12r5lpj317q082dgs.jpg)
 
 
 
@@ -206,15 +186,7 @@ Truncate删除，它是将整个表摧毁，然后再创建一张一模一样的
 
 演示：
 
-用delete：
 
-![1551922767458](C:\Users\ADMINI~1\AppData\Local\Temp\1551922767458.png)
-
-
-
-用truncate
-
-![1551922869011](C:\Users\ADMINI~1\AppData\Local\Temp\1551922869011.png)
 
 **注意，delete删除uid不会重置，truncate删除uid会重置（因为删除了表结构，然后再创建一个一模一样的表，所以再插入时uid会重置）**
 
@@ -228,7 +200,7 @@ select [distinct]  * 列名，列名 from 表名  [ where 条件];
 
 select * from product；
 
-![1551924185754](C:\Users\ADMINI~1\AppData\Local\Temp\1551924185754.png)
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1gc1zj1rkj316q057js2.jpg)
 
 ##### 4.2.查询商品和商品价格
 
@@ -402,9 +374,25 @@ order by (它必须放到最后)
 
 左外连接：select * from A left outer join B on 条件；
 
-右外连接：
+右外连接：select * from A right outer join B on 条件;
 
 
 
+## 五、案例:网上书店系统综合查询
 
+- 网上书店系统表
+
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1g8ealql7j309106b3yg.jpg)
+
+- 查询会员表中会员编号、会员名称及电话号码,要求列名以汉字标题显示.
+
+![](http://ww1.sinaimg.cn/large/005WjvZYly1g1g8abexm0j30lo0720t2.jpg)
+
+
+
+- 查询价格最高的图书信息
+
+  ![](http://ww1.sinaimg.cn/large/005WjvZYly1g1gbe5wahlj316d054t9c.jpg)
+
+  ![](http://ww1.sinaimg.cn/large/005WjvZYly1g1gbcx0vo6j30pb043aa3.jpg)
 
