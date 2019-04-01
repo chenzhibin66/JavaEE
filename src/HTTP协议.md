@@ -26,7 +26,7 @@ HTTP，超文本传输协议(HyperText Transfer Protocol)是互联网上应用�
 
 403 Forbidden  服务器接受请求，但是被拒绝处理。 
 
-404 Not Found  服务器已经找到任何匹配Request-URI的资源。 
+404 Not Found  服务器没有找到任何匹配Request-URI的资源。 
 
 405 Menthod Not Allowed  Request-Line 请求的方法不被允许通过指定的URI。 
 
