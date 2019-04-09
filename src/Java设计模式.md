@@ -1,4 +1,4 @@
-SSM(springmvc+spring+mybatis) + Redis实现
+Java设计模式
 
 1.java反射技术
 
@@ -234,3 +234,171 @@ public class InterceptorJdkProxy implements InvocationHandler {
 6. 返回结果。
 
 ![](http://ww1.sinaimg.cn/large/005WjvZYly1g1v6jfg3wpj30l00iggm4.jpg)
+
+5.责任链模式
+
+当一个对象在一条链上被多个拦截器拦截处理(拦截器也可以选择不拦截处理它)时，我们把这样的设计模式称为责任链模式。
+
+责任链拦截器接口定义：
+
+```java
+public class Interceptor1 implements Interceptor {
+    @Override
+    public boolean before(Object proxy, Object target, Method method, Object[] args) {
+        System.out.println("拦截器1的before方法");
+        return true;
+    }
+
+    @Override
+    public void around(Object proxy, Object target, Method method, Object[] args) {
+
+    }
+
+    @Override
+    public void after(Object proxy, Object target, Method method, Object[] args) {
+        System.out.println("拦截器1的after方法");
+    }
+}
+```
+
+测试责任链模式上的多拦截器：
+
+```java
+public static void main(String[] args) {
+    HelloWorld proxy1 = (HelloWorld) InterceptorJdkProxy.bind(new HelloWorldImpl(),
+            "cn.calvin.test.Interceptor1");
+    HelloWorld proxy2 = (HelloWorld) InterceptorJdkProxy.bind(proxy1,
+            "cn.calvin.test.Interceptor2");
+    HelloWorld proxy3 = (HelloWorld) InterceptorJdkProxy.bind(proxy2,
+            "cn.calvin.test.Interceptor3");
+    proxy3.sayHelloWorld();
+}
+```
+
+责任链模式的优点在于我们可以在传递链上加入新的拦截器，增加拦截逻辑，其缺点是会增加代理和反射，而代理和反射的性能不高。
+
+6.观察者模式
+
+在现实中，有些条件发生了变化。其他的行为也需要发生变化。举个例子，一个商家有一些产品，它和一些电商合作，每当有新产品时，就会把这些产品推送到电商，现在只和淘宝、京东合作，于是有如下伪代码：
+
+if(产品库有新产品){
+
+推送产品到淘宝；
+
+推送产品到京东；
+
+}
+
+如果公司又和国美、苏宁、当当签订合作协议，那么就需要改变这些伪代码。
+
+if(产品库有新产品){
+
+推送产品到淘宝；
+
+推送产品到京东；
+
+推送产品到国美；
+
+推送产品到苏宁；
+
+推送产品到当当；
+
+}
+
+按照这种方法，if的逻辑就异常复杂了。观察者模式更易于扩展，首先，把每一个电商接口看成一个观察者，每一个观察者都能观察到产品列表(被监听对象)。当公司发布新产品时，就会发送到这个产品列表上，于是产品列表就发生了变化，这时就可以触发各个电商接口(观察者)发送新产品到对应的合作电商那里。
+
+代码：
+
+被观察的产品列表：
+
+```java
+public class ProductList extends Observable {
+    private List<String> productList = null;
+    private static ProductList instance;
+
+    private ProductList() {
+    }
+
+    /**
+     * 单例模式
+     * 取得唯一实例
+     *
+     * @return
+     */
+    public static ProductList getInstance() {
+        if (instance == null) {
+            instance = new ProductList();
+            instance.productList = new ArrayList<>();
+        }
+        return instance;
+    }
+
+    /**
+     * 增加观察者
+     *
+     * @param observable
+     */
+    public void addProductListObserver(Observable observable) {
+        this.addObserver((Observer) observable);
+    }
+
+    /**
+     * 新增产品
+     *
+     * @param newProduct
+     */
+    public void addProduct(String newProduct) {
+        productList.add(newProduct);
+        System.out.println("产品列表新增了产品：" + newProduct);
+        this.setChanged();//设置被观察对象发送变化
+        this.notifyObservers(newProduct); //通知观察者，并传递了新产品
+    }
+}
+```
+
+- 构建方法私有化，避免通过new的方式创建对象，而是通过getInstace方法获得产生列表单例，使用的是单例模式。
+
+- addProductListObserver可以增加一个电商接口(观察者)。
+
+- 核心逻辑在addProduct方法上。在产品列表上增加了一个新的产品，然后调用setChanged方法。这个方法用于告知观察者当前被观察者发生了变化，如果没有则无法触发其行为。最后通过notifyObservers告知观察者，让它们发生相应的动作，并将新产品作为参数传递给观察者。
+
+  
+
+京东和淘宝电商接口:
+
+```java
+public class JingDongObserver implements Observer {
+    @Override
+    public void update(Observable o, Object product) {
+        String newProduct = (String) product;
+        System.out.println("发送新产品【"+newProduct+"】同步到京东商城");
+    }
+}
+```
+
+```java
+public class TaoBaoObserver implements Observer {
+    @Override
+    public void update(Observable o, Object product) {
+        String newProduct = (String) product;
+        System.out.println("发送新产品【"+newProduct+"】同步到淘宝商城");
+    }
+}
+```
+
+测试观察者模式：
+
+```java
+public class test {
+    public static void main(String[] args) {
+        ProductList observable =ProductList.getInstance();
+        TaoBaoObserver taoBaoObserver =new TaoBaoObserver();
+        JingDongObserver jingDongObserver =new JingDongObserver();
+        observable.addObserver(taoBaoObserver);
+        observable.addObserver(jingDongObserver);
+        observable.addProduct("新增产品1");
+    }
+}
+```
+
+结果：![](http://ww1.sinaimg.cn/large/005WjvZYly1g1wj3ts02oj30ip05d3yy.jpg)
