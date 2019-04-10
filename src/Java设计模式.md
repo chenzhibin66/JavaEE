@@ -402,3 +402,168 @@ public class test {
 ```
 
 结果：![](http://ww1.sinaimg.cn/large/005WjvZYly1g1wj3ts02oj30ip05d3yy.jpg)
+
+7.工厂模式和抽象工厂模式
+
+1. 普通工厂模式
+
+   例如：有个Iproduct的产品接口，它下面有5个实现类Product1,Product2,Product3,Product4,Product5。它们属于一个大类，可以通过一个工厂去管理它们的生成，但是由于类型不同，所以初始化有所不同。为了方便使用产品工厂(ProductFactory)类来创建这些产品的对象，用户可以通过产品号来确定需要哪种产品。
+
+   ProductFactory的伪代码：
+
+   ```java
+   public class ProductFactory {
+       public static IProduct createProduct(String productNo){
+           switch (productNo){
+               case "1": return new Product1(xxx);
+               case "1": return new Product1(xxx);
+               case "1": return new Product1(xxx);
+               case "1": return new Product1(xxx);
+               case "1": return new Product1(xxx);
+               default:throw new NotSupportedException("未支持此编号产品生产");
+           }
+       }
+   }
+   ```
+
+2. 抽象工厂模式
+
+   抽象工厂模式可以向客户端提供一个接口，使得客户端在不必指定产品的具体情况下，创建多个产品族中的产品对象。
+
+   IProductFactory工厂接口：
+
+   ```java
+   public interface IProductFactory {
+       public Iproduct createProduct(String productNo);
+   }
+   ```
+
+实现工厂类：
+
+```java
+public class ProductFactory1 implements IProductFactory {
+    @Override
+    public Iproduct createProduct(String productNo) {
+        Iproduct iproduct = xxx;//工厂1生成产品对象规则，可以是一类产品的规则
+        return iproduct;
+    }
+}
+```
+
+```java
+public class ProductFactory2 implements IProductFactory {
+    @Override
+    public Iproduct createProduct(String productNo) {
+        Iproduct iproduct = xxx;//工厂2生成产品对象规则，可以是一类产品的规则
+        return iproduct;
+    }
+}
+```
+
+```java
+public class ProductFactory3 implements IProductFactory {
+    @Override
+    public Iproduct createProduct(String productNo) {
+        Iproduct iproduct = xxx;//工厂3生成产品对象规则，可以是一类产品的规则
+        return iproduct;
+    }
+}
+```
+
+然后完成一个公共的工厂：
+
+```java
+public class ProductFactory implements IProductFactory {
+    @Override
+    public Iproduct createProduct(String productNo) {
+        char ch = productNo.charAt(0);
+        IProductFactory factory = null;
+        if (ch == '1') {
+            factory = new ProductFactory1();
+        } else if (ch == '2') {
+            factory = new ProductFactory2();
+        } else if (ch == '3') {
+            factory = new ProductFactory3();
+        }
+        if (factory != null) {
+            return factory.createProduct(productNo);
+        }
+        return null;
+    }
+}
+```
+
+7.建造者模式
+
+建造者模式属于对象的创建模式。可以将一个产品的内部表象(属性)与产品的生成过程分割开来，从而使一个建造过程生成具有不用的内部表象的产品对象。
+
+**实现**
+
+假设旅游套票可以分为：普通成年人、退休老人、半票有座小孩、免费无座小孩、军人及其家属等，他们有不同的规定和优惠。
+
+第一步，构建普通成年人票
+
+第二步，构建退休老人票
+
+第三步，构建有座儿童票
+
+第四步，构建无座儿童票
+
+第五步，构建军人及其家属票
+
+步骤1：创建一个TicketHelper对象，它是配置类，帮助我们一步一步完成构建对象
+
+```java
+public class TicketHelper {
+    public void buildAdult(String info) {
+        System.out.println("构建成年人票逻辑" + info);
+    }
+
+    public void buildChildForSeat(String info) {
+        System.out.println("构建有座儿童票逻辑");
+    }
+
+    public void buildChildNoSeat(String info) {
+        System.out.println("构建无座儿童票逻辑");
+    }
+
+    public void buildElderly(String info) {
+        System.out.println("构建有老年人票逻辑");
+    }
+
+    public void buildSoldier(String info) {
+        System.out.println("构建军人及其家属票逻辑");
+    }
+}
+```
+
+我们将创建一个表示食物条目（比如汉堡和冷饮）的 *Item* 接口和实现 *Item* 接口的实体类，以及一个表示食物包装的 *Packing* 接口和实现 *Packing*接口的实体类，汉堡是包在纸盒中，冷饮是装在瓶子中。
+
+然后我们创建一个 *Meal* 类，带有 *Item* 的 *ArrayList* 和一个通过结合 *Item* 来创建不同类型的 *Meal* 对象的 *MealBuilder*。*BuilderPatternDemo*，我们的演示类使用 *MealBuilder* 来创建一个 *Meal*。
+
+
+
+步骤2：需要一个构建类------TicketBuilder
+
+```java
+public class TicketBuilder {
+    public static Object builder(TicketHelper ticketHelper) {
+        System.out.println("通过TicketHelper构建套票信息");
+        return null;
+    }
+}
+```
+
+步骤3：完成构建
+
+```java
+public static void main(String[] args) {
+    TicketHelper helper = new TicketHelper();
+    helper.buildAdult("成人票");
+    helper.buildChildForSeat("有座儿童");
+    helper.buildChildNoSeat("无座儿童");
+    helper.buildSoldier("军人票");
+    helper.buildElderly("老人票");
+    Object ticket = TicketBuilder.builder(helper);
+}
+```
